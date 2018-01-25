@@ -1,4 +1,4 @@
-$topnav-background-color: #290A38;
+$topnav-background-color: #290a38;
 
 .footer-text {
   display: block;
@@ -14,4 +14,10 @@ $topnav-background-color: #290A38;
   background-color: $topnav-background-color;
   margin-bottom: 0;
   padding: 0.3em;
+}
+
+@media screen and (max-width: 992px) {
+  .blockquote {
+    font-size: 1.2rem;
+  }
 }
