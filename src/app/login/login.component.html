@@ -1,0 +1,24 @@
+<div class="login-page">
+  <div class="row justify-content-md-center">
+      <div class="col-md-4">
+          <img src="assets/images/pinOndeIrBranco.png" width="150px" />
+          <h1>Onde Ir Fidelidade - Portal Administrativo</h1>
+          <ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert>
+          <form role="form">
+              <div class="form-content">
+                  <div class="form-group">
+                      <input type="email" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" class="form-control input-underline input-lg"
+                             placeholder="Email" (keyup.enter)="onLoggedin()">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="password" class="form-control input-underline input-lg" [(ngModel)]="pass" [ngModelOptions]="{standalone: true}"
+                          placeholder="Senha" (keyup.enter)="onLoggedin()">
+                  </div>
+              </div>
+              <a class="btn rounded-btn" (click)="onLoggedin()"> Entrar </a>
+          </form>
+      </div>
+  </div>
+</div>
+<app-loading [isProcessing]="isProcessing"></app-loading>
