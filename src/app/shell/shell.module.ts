@@ -9,6 +9,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { OwnerComponent } from './owner/owner.component';
+import { LoyaltyComponent } from './loyalty/loyalty.component';
+import { OffersComponent } from './offers/offers.component';
 
 @NgModule({
   imports: [

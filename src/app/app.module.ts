@@ -9,6 +9,7 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { AppConfig } from './shared/config/app.config';
 import { LoadingComponent } from './shared/modules/loading/loading.component';
 import { SharedModule } from './shared/shared.module';
+import { AlertService } from './shared/modules/alert/alert.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SharedModule } from './shared/shared.module';
   ],
   providers: [
     AuthGuard,
-    AppConfig
+    AppConfig,
+    AlertService
   ],
   bootstrap: [
     AppComponent

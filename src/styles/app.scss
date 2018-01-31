@@ -15,3 +15,15 @@ $sidebar-background-color: #3F0F54;
 .sidebar[_ngcontent-c3]   .list-group[_ngcontent-c3]   a.router-link-active[_ngcontent-c3] {
     background-color: $topbar-background-color!important;
 }
+
+.btn-primary {
+  background-color: #693684!important;
+  border-color: #693684!important;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #F79633!important;
+  border-color: #F79633!important;
+  cursor: pointer;
+}

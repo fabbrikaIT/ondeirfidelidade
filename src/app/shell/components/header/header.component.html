@@ -31,7 +31,7 @@
           <b class="caret"></b>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/profile']">
+          <a *ngIf="authUser.type == 1" class="dropdown-item" href="javascript:void(0)" [routerLink]="['/profile']">
             <i class="fa fa-fw fa-user"></i>Meus Dados
           </a>
           <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">

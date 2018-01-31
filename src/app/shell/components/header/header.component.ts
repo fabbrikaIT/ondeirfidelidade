@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 
 import { BaseComponent } from "../../../shared/base/base.component";
+import { LoginResultEntity } from "../../../shared/models/auth/loginResult.model";
 
 @Component({
   selector: "app-header",
@@ -11,11 +12,15 @@ import { BaseComponent } from "../../../shared/base/base.component";
 export class HeaderComponent extends BaseComponent implements OnInit {
   pushRightClass: string = "push-right";
 
+  authUser: LoginResultEntity;
+
   constructor(public router: Router) {
-    super();
+    super(null);
   }
 
   ngOnInit() {
+    this.authUser = this.getLoginInfo();
+
     this.router.events.subscribe(val => {
       if (
         val instanceof NavigationEnd &&

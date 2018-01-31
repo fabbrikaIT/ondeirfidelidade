@@ -3,7 +3,7 @@
     <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
       <i class="fa fa-fw fa-dashboard"></i>&nbsp;Home
     </a>
-    <a routerLink="/clients" [routerLinkActive]="['router-link-active']" class="list-group-item">
+    <a *ngIf="authUser.type == 2" routerLink="/owner" [routerLinkActive]="['router-link-active']" class="list-group-item">
       <i class="fa fa-fw fa-users"></i>&nbsp;Clientes
     </a>
     <a routerLink="/loyalty" [routerLinkActive]="['router-link-active']" class="list-group-item">

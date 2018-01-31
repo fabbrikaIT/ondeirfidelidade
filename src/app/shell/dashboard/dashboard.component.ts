@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { BaseComponent } from '../../shared/base/base.component';
+import { AlertService } from '../../shared/modules/alert/alert.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +10,9 @@ import { BaseComponent } from '../../shared/base/base.component';
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
-  constructor() { super(); }
+  constructor(alert: AlertService) {
+    super(alert);
+  }
 
   ngOnInit() {
   }

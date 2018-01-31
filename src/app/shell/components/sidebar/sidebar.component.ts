@@ -1,17 +1,25 @@
+import { LoginResultEntity } from './../../../shared/models/auth/loginResult.model';
 import { Component, OnInit } from "@angular/core";
+import { BaseComponent } from "../../../shared/base/base.component";
 
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
   styleUrls: ["./sidebar.component.scss"]
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent extends BaseComponent implements OnInit {
   isActive: boolean = false;
   showMenu: string = "";
 
-  constructor() {}
+  authUser: LoginResultEntity;
 
-  ngOnInit() {}
+  constructor() {
+    super(null);
+  }
+
+  ngOnInit() {
+    this.authUser = this.getLoginInfo();
+  }
 
   eventCalled() {
     this.isActive = !this.isActive;
