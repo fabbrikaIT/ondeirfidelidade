@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <app-page-header icon="fa-credit-card" [heading]="headerTitle" canGoBack=true></app-page-header>
+
+  <div class="col-12">
+    <form class="needs-validation" [formGroup]="formFields">
+      <div class="form-row">
+        <div class="card w-100">
+          <div class="card-header">
+            <h5>Dados do Programa</h5>
+          </div>
+          <div class="card-body">
+            <div class="form-group col-sm-12" [ngClass]="applyCssError('name')">
+              <div class="input-group mb-3">
+                <div class="input-group-addon">
+                  <i class="fa fa-building"></i>
+                </div>
+                <input class="form-control" id="txtName" autofocus formControlName="name" placeholder="Nome do Programa de Fidelidade" 
+                [(ngModel)]="loyalty.name" [ngClass]="applyCssError('name')"/>
+              </div>
+              <app-field-control-error [showError]="verifyValidTouched('name')" errorMessage="Título/Nome é Obrigatório" class="fixErrorPosition"></app-field-control-error>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-loading [isProcessing]="isProcessing"></app-loading>

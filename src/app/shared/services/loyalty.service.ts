@@ -27,4 +27,26 @@ export class LoyaltyService extends BaseService {
             })
             .catch(this.handleErrorObservable);
   }
+
+  public ListLoyaltyByStatus(ownerId: number, status: string): Observable<Array<LoyaltyEntity>> {
+    const serviceUrl = `${this.config.baseUrl}loyalty/list/${ownerId}/${status}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public GetLoyalty(loyaltyId: number): Observable<LoyaltyEntity> {
+    const serviceUrl = `${this.config.baseUrl}loyalty/${loyaltyId}`;
+
+    return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
 }

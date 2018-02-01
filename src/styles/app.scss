@@ -16,6 +16,7 @@ $sidebar-background-color: #3F0F54;
     background-color: $topbar-background-color!important;
 }
 
+/* Estilo dos botões */
 .btn-primary {
   background-color: #693684!important;
   border-color: #693684!important;
@@ -26,4 +27,19 @@ $sidebar-background-color: #3F0F54;
   background-color: #F79633!important;
   border-color: #F79633!important;
   cursor: pointer;
+}
+
+/* Estilo dos inputs e erros */
+.input-group {
+  padding-bottom: 1em;
+}
+
+.input-group .invalid-feedback {
+  position: absolute;
+  left: 0;
+  top: 2.5em;
+}
+
+.fixErrorPosition .alert-danger {
+  margin-top: -2em;
 }
