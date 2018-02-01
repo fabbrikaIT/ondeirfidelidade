@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localePt from '@angular/common/locales/pt';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +12,8 @@ import { AppConfig } from './shared/config/app.config';
 import { LoadingComponent } from './shared/modules/loading/loading.component';
 import { SharedModule } from './shared/shared.module';
 import { AlertService } from './shared/modules/alert/alert.service';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -20,9 +24,11 @@ import { AlertService } from './shared/modules/alert/alert.service';
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: "pt-br" },
     AuthGuard,
     AppConfig,
     AlertService
