@@ -51,4 +51,27 @@ export abstract class BaseComponent {
       'is-valid': !this.verifyValidTouched(campo) && this.verifyTouched(campo)
     };
   }
+
+  // Verificação se o formulário é valido
+  public formIsValid(): boolean {
+    if (!this.formFields.valid) {
+      this.validOnSubmit(this.formFields);
+    }
+
+    return this.formFields.valid;
+  }
+
+  validOnSubmit(groupForm: FormGroup) {
+    const keys = Object.keys(groupForm.controls);
+
+    keys.forEach(key => {
+      const control = groupForm.get(key);
+
+      control.markAsDirty();
+
+      if (control instanceof FormGroup) {
+        this.validOnSubmit(control);
+      }
+    });
+  }
 }

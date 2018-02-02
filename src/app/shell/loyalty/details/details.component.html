@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-12 mb-2">
       <div *ngIf="!isNew" class="float-left">
-          <button  class="btn btn-primary">Imprimir QR Code</button>
+          <button  class="btn btn-primary" (click)="onPrintQRCode()">Imprimir QR Code</button>
       </div>
 
       <switch class="float-right" onColor="green" offColor="red" onText="Publicado" offText="Não Publicado" [disabled]="isNew" [(status)]="activeStatus"
@@ -39,7 +39,7 @@
                         <div class="input-group-addon" (click)="ds.toggle()" style="cursor: pointer;">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input class="form-control" formControlName="startDate" placeholder="dd/mm/yyyy" mask="00/00/0000" [minDate]="minDate"
+                        <input class="form-control" formControlName="startDate" placeholder="dd/mm/yyyy" mask="00/00/0000"
                         [(bsValue)]="loyalty.startDate" [ngClass]="applyCssError('startDate')" bsDatepicker #ds="bsDatepicker"
                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }"/>
                       </div>
@@ -179,7 +179,7 @@
               <div class="card-footer">
                 <button class="btn btn-danger float-left">Excluir</button>
 
-                <button class="btn btn-primary float-right">Salvar</button>
+                <button class="btn btn-primary float-right" (click)="onSave()">Salvar</button>
                 <button class="btn btn-primary float-right mr-1">Visualizar</button>
               </div>
             </div>

@@ -6,10 +6,13 @@ import { DefaultImageDirective } from './directives/defautImage.directive';
 import { AlertComponent } from './modules/alert/alert.component';
 import { PageHeaderComponent } from './modules/page-header/page-header.component';
 import { FieldControlErrorComponent } from './modules/field-control-error/field-control-error.component';
+import { DialogComponent } from './modules/dialog/dialog.component';
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     LoadingComponent,
@@ -17,14 +20,16 @@ import { FieldControlErrorComponent } from './modules/field-control-error/field-
     AlertComponent,
     PageHeaderComponent,
     PageHeaderComponent,
-    FieldControlErrorComponent
+    FieldControlErrorComponent,
+    DialogComponent
   ],
   exports: [
     LoadingComponent,
     DefaultImageDirective,
     AlertComponent,
     PageHeaderComponent,
-    FieldControlErrorComponent
+    FieldControlErrorComponent,
+    DialogComponent
   ],
   providers: [
   ]

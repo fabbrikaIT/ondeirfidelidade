@@ -12,6 +12,7 @@ import { AppConfig } from './shared/config/app.config';
 import { LoadingComponent } from './shared/modules/loading/loading.component';
 import { SharedModule } from './shared/shared.module';
 import { AlertService } from './shared/modules/alert/alert.service';
+import { DialogService } from './shared/modules/dialog/dialog.service';
 
 registerLocaleData(localePt);
 
@@ -31,7 +32,8 @@ registerLocaleData(localePt);
     { provide: LOCALE_ID, useValue: "pt-br" },
     AuthGuard,
     AppConfig,
-    AlertService
+    AlertService,
+    DialogService
   ],
   bootstrap: [
     AppComponent
