@@ -4,6 +4,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import localePt from '@angular/common/locales/pt';
+import { QRCodeModule } from 'angular2-qrcode';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,12 +14,18 @@ import { LoadingComponent } from './shared/modules/loading/loading.component';
 import { SharedModule } from './shared/shared.module';
 import { AlertService } from './shared/modules/alert/alert.service';
 import { DialogService } from './shared/modules/dialog/dialog.service';
+import { AdDirective } from './shared/modules/dialog/dialog.component';
+import { QrcodeComponent } from './shell/loyalty/qrcode/qrcode.component';
+import { CardComponent } from './shell/loyalty/card/card.component';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdDirective,
+    QrcodeComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +33,8 @@ registerLocaleData(localePt);
     HttpClientModule,
     CommonModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    QRCodeModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "pt-br" },
@@ -34,6 +42,10 @@ registerLocaleData(localePt);
     AppConfig,
     AlertService,
     DialogService
+  ],
+  entryComponents: [
+    QrcodeComponent,
+    CardComponent
   ],
   bootstrap: [
     AppComponent

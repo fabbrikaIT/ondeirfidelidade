@@ -8,6 +8,8 @@ import { PageHeaderComponent } from './modules/page-header/page-header.component
 import { FieldControlErrorComponent } from './modules/field-control-error/field-control-error.component';
 import { DialogComponent } from './modules/dialog/dialog.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { QrcodeComponent } from '../shell/loyalty/qrcode/qrcode.component';
+import { DynamicViewComponent } from './modules/dynamic-view/dynamic-view.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { ModalModule } from 'ngx-bootstrap';
     PageHeaderComponent,
     PageHeaderComponent,
     FieldControlErrorComponent,
-    DialogComponent
+    DialogComponent,
+    DynamicViewComponent
   ],
   exports: [
     LoadingComponent,

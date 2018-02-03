@@ -6,12 +6,13 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule, TimepickerModule } from 'ngx-bootstrap';
 import { BootstrapSwitchModule } from 'angular2-bootstrap-switch';
+import { QRCodeModule } from 'angular2-qrcode';
 
 import { LoyaltyRoutingModule } from './loyalty-routing.module';
 import { LoyaltyComponent } from "./loyalty.component";
 import { LoyaltyService } from './../../shared/services/loyalty.service';
 import { DetailsComponent } from './details/details.component';
-
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { DetailsComponent } from './details/details.component';
     LoyaltyRoutingModule,
     SharedModule,
     InputMaskModule,
+    QRCodeModule,
     NgbDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BootstrapSwitchModule.forRoot(),

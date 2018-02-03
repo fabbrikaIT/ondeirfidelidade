@@ -23,6 +23,7 @@ export class LoyaltyEntity extends BaseEntity implements IToMysqlDbEntity {
   public status: ELoyaltyStatus;
   public validity: Array<LoyaltyValidity>;
   public usageType: LoyaltyUsageType;
+  public qrHash: string;
 
   public static getInstance(): LoyaltyEntity {
     const instance = new LoyaltyEntity();

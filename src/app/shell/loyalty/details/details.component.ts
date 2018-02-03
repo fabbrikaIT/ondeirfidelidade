@@ -1,3 +1,4 @@
+import { CardComponent } from './../card/card.component';
 import {Location} from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
@@ -13,6 +14,7 @@ import { LoyaltyEntity } from '../../../shared/models/loyalty/loyalty';
 import { LoyaltyService } from './../../../shared/services/loyalty.service';
 import { LoyaltyValidity } from '../../../shared/models/loyalty/loyaltyValidity';
 import { DialogService } from './../../../shared/modules/dialog/dialog.service';
+import { QrcodeComponent } from '../qrcode/qrcode.component';
 
 @Component({
   selector: 'app-details',
@@ -29,6 +31,7 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
   loyalty: LoyaltyEntity;
 
   dialogSubscriber: any;
+  printSubscriber: any;
 
   constructor(alert: AlertService, private route: ActivatedRoute, private formBuilder: FormBuilder, private dialogService: DialogService,
               private service: LoyaltyService, private _localeService: BsLocaleService, private location: Location) {
@@ -143,6 +146,29 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
 
   //Imprimi QR Code de identificação.
   onPrintQRCode() {
+    this.dialogService.dialogContent("Imprimir QR Code", {
+      component: QrcodeComponent,
+      inputs: {
+        qrcode: this.loyalty.qrHash
+      }
+    }, this.printQRCode, "Imprimir");
+  }
+
+  printQRCode() {
+    console.log("Imprimir");
+  }
+
+  // Visualiza modelo do cartão de fidelidade
+  onLoyaltyCardView() {
+    this.dialogService.dialogContent("Cartão de Fidelidade", {
+      component: CardComponent,
+      inputs: {
+        loyalty: this.loyalty
+      }
+    }, this.closeCart, "Aprovar");
+  }
+
+  closeCart() {
 
   }
 
@@ -170,14 +196,15 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
                   this.activeStatus = true;
                   this.onLoyaltyStatusChange();
                 }
+
+                // Mostrar QR Code para impressão
+
+                // Retorna para a listagem
+                this.location.back();
               });
             }
 
             this.dialogService.dialogConfirm("Programa de Fidelidade", "Deseja publicar o programa de fidelidade criado?");
-
-            // Mostrar QR Code para impressão
-
-            this.location.back();
           },
           err => {
             this.alert.alertError("Criando novo Fidelidade", err);

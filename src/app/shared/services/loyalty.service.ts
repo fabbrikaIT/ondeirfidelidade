@@ -55,7 +55,7 @@ export class LoyaltyService extends BaseService {
                 //     x.endTime = new Date((x.endTime as Date).getTimezoneOffset());
                 //   });
                 // }
-                console.log(loyalty.validity);
+                // console.log(loyalty.validity);
 
                 return loyalty;
             })
