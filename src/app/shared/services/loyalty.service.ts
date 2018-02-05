@@ -90,6 +90,20 @@ export class LoyaltyService extends BaseService {
             .catch(this.handleErrorObservable);
   }
 
+  public DeleteLoyalty(loyaltyId: number): Observable<boolean> {
+    const serviceUrl = `${this.config.baseUrl}loyalty/${loyaltyId}`;
+    const body = {
+      id: loyaltyId
+    };
+
+    return this.clientHttp
+            .delete(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Executed;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
   /**
    * CreateLoyalty
    */

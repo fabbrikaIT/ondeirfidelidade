@@ -15,7 +15,7 @@
     <button type="button" class="btn btn-primary" (click)="close()">Fechar</button>
   </div>
   <div *ngIf="isConfirm" class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="emitDialogResult(true)" >{{confirmText}}</button>
+    <button *ngIf="showConfirm" type="button" class="btn btn-success" (click)="emitDialogResult(true)" >{{confirmText}}</button>
     <button type="button" class="btn btn-danger" (click)="emitDialogResult(false)" >{{cancelText}}</button>
   </div>
 </ng-template>

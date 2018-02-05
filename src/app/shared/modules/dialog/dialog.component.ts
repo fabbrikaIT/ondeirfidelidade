@@ -28,6 +28,7 @@ export class DialogComponent implements OnInit {
 
   isConfirm: boolean = false;
   isContent: boolean = false;
+  showConfirm: boolean = true;
 
   modalRef: BsModalRef;
 
@@ -57,7 +58,11 @@ export class DialogComponent implements OnInit {
         this.cancelText = dialog.dialog.cancelText;
       }
 
-      this.callback = dialog.callback;
+      if (dialog.showConfirm !== undefined) {
+        this.showConfirm = dialog.showConfirm;
+      }
+
+      this.callback = dialog.dialog.callback;
 
       try {
         this.componentData = dialog.content;
@@ -94,6 +99,9 @@ export class DialogComponent implements OnInit {
         break;
       case EDialogType.Confirm:
         this.isConfirm = true;
+        this.cancelText = dialog.cancelText;
+        this.confirmText = dialog.confirmText;
+        this.callback = dialog.callback;
         break;
       default:
         break;
@@ -106,7 +114,9 @@ export class DialogComponent implements OnInit {
 
   emitDialogResult(result) {
     if (this.callback) {
-      this.callback();
+      if (result) {
+        this.callback(result);
+      }
     } else {
       this.dialogService.dialogResult.emit(result);
     }

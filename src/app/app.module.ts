@@ -4,7 +4,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import localePt from '@angular/common/locales/pt';
-import { QRCodeModule } from 'angular2-qrcode';
+import { QRCodeModule, QRCodeComponent } from 'angular2-qrcode';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +42,9 @@ registerLocaleData(localePt);
     AppConfig,
     AlertService,
     DialogService
+  ],
+  exports: [
+    QRCodeComponent
   ],
   entryComponents: [
     QrcodeComponent,

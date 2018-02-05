@@ -9,7 +9,9 @@ export class QrcodeComponent implements OnInit {
   @Input() qrHash: string;
 
   constructor(private injector: Injector) {
-    this.qrHash = this.injector.get('qrcode');
+    if (injector && injector.get('qrcode')) {
+      this.qrHash = this.injector.get('qrcode');
+    }
   }
 
   ngOnInit() {

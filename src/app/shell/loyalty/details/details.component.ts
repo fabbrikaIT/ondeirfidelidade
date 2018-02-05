@@ -151,11 +151,30 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
       inputs: {
         qrcode: this.loyalty.qrHash
       }
-    }, this.printQRCode, "Imprimir");
+    }, this.printQRCode, "Imprimir", "Cancelar", true);
   }
 
   printQRCode() {
-    console.log("Imprimir");
+    let printContents, popupWin;
+
+    printContents = document.getElementById('print-section').innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Impressão de QR Code - Programa de Fidelidade</title>
+          <style>
+          //........Customized style.......
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+
+    popupWin.document.close();
   }
 
   // Visualiza modelo do cartão de fidelidade
@@ -165,7 +184,7 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
       inputs: {
         loyalty: this.loyalty
       }
-    }, this.closeCart, "Aprovar");
+    }, this.closeCart, "Aprovar", "Fechar", false);
   }
 
   closeCart() {
@@ -224,5 +243,23 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
           });
       }
     }
+  }
+
+  onDelete() {
+    this.dialogService.dialogConfirm("Excluir Fidelidade", "Deseja realmente excluir o programa de fidelidade?", "Excluir", "Cancelar", ret => {
+      if (ret) {
+        this.isProcessing = true;
+
+        this.service.DeleteLoyalty(this.loyalty.id).subscribe(
+          result => {
+            this.location.back();
+          },
+          err => {
+            this.alert.alertError("Excluir Fidelidade", err);
+              this.isProcessing = false;
+          }
+        );
+      }
+    });
   }
 }
