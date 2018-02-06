@@ -28,7 +28,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     authUser.loginAccept = true;
     authUser.userName = "Developer Mode";
     authUser.type = 2;
-    authUser.userId = 7;
+    authUser.userId = 0;
 
     // Authenticando usuário
     localStorage.setItem('isLoggedin', 'true');

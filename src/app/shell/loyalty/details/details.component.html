@@ -40,7 +40,7 @@
                           <i class="fa fa-calendar"></i>
                         </div>
                         <input class="form-control" formControlName="startDate" placeholder="dd/mm/yyyy" mask="00/00/0000"
-                        [(bsValue)]="loyalty.startDate" [ngClass]="applyCssError('startDate')" bsDatepicker #ds="bsDatepicker"
+                        [ngModel]="loyalty?.startDate" (ngModelChange)="loyalty.startDate=$event" [ngClass]="applyCssError('startDate')" bsDatepicker #ds="bsDatepicker"
                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }"/>
                       </div>
                       <app-field-control-error [showError]="verifyValidTouched('startDate')" errorMessage="Data de inicio é Obrigatório" class="fixErrorPosition"></app-field-control-error>
@@ -52,7 +52,7 @@
                           <i class="fa fa-calendar"></i>
                         </div>
                         <input class="form-control" formControlName="endDate" placeholder="dd/mm/yyyy" mask="00/00/0000" [minDate]="ds.bsValue"
-                        [(bsValue)]="loyalty.endDate" [ngClass]="applyCssError('endDate')" bsDatepicker #de="bsDatepicker"
+                        [ngModel]="loyalty?.endDate" (ngModelChange)="loyalty.endDate=$event" [ngClass]="applyCssError('endDate')" bsDatepicker #de="bsDatepicker"
                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }"/>
                       </div>
                     </div>
@@ -195,7 +195,7 @@
 <div id="print-section" style="display: none;">
   <div style="text-align: center!important;">
     <div style="-webkit-box-flex: 0; -ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; position: relative; width: 100%;min-height: 1px;padding-right: 15px;padding-left: 15px;">
-      <img style="width: 25%!important;" src="/assets/images/ondeir-roxosemfundo.png" >
+      <img style="width: 25%!important;" src="/fidelidade/assets/images/ondeir-roxosemfundo.png" >
       <h1 style="font-size: 2.0rem; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.2; color: inherit;">Programa de Fidelidade - {{ loyalty.name }}</h1>
     </div>
     <hr style="margin-top: 1rem; margin-bottom: 1rem; border: 0; border-top: 1px solid rgba(0,0,0,.1);"/>

@@ -1,4 +1,3 @@
-import { CardComponent } from './../card/card.component';
 import {Location} from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
@@ -15,6 +14,7 @@ import { LoyaltyService } from './../../../shared/services/loyalty.service';
 import { LoyaltyValidity } from '../../../shared/models/loyalty/loyaltyValidity';
 import { DialogService } from './../../../shared/modules/dialog/dialog.service';
 import { QrcodeComponent } from '../qrcode/qrcode.component';
+import { CardComponent } from './../card/card.component';
 
 @Component({
   selector: 'app-details',

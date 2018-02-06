@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,11 +13,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { OwnerComponent } from './owner/owner.component';
 import { LoyaltyComponent } from './loyalty/loyalty.component';
 import { OffersComponent } from './offers/offers.component';
+import { OwnerService } from './../shared/services/owner.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ShellRoutingModule,
+    FormsModule,
+    SharedModule,
     NgbDropdownModule.forRoot()
   ],
   declarations: [
@@ -24,6 +29,9 @@ import { OffersComponent } from './offers/offers.component';
     HeaderComponent,
     SidebarComponent,
     FooterComponent
+  ],
+  providers: [
+    OwnerService
   ]
 })
 export class ShellModule {

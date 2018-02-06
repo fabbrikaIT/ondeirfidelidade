@@ -6,7 +6,7 @@ import { AlertService } from '../modules/alert/alert.service';
 export abstract class BaseComponent {
   public isProcessing: boolean = false;
   public loginInfo: LoginResultEntity = this.getLoginInfo();
-  protected formFields: FormGroup;
+  public formFields: FormGroup;
 
   constructor(protected alert: AlertService) {
 
@@ -19,11 +19,18 @@ export abstract class BaseComponent {
       ret.loginAccept = false;
       ret.userName = "Usuário";
       ret.type = 1;
+      ret.userId = 0;
 
       return ret;
     }
 
     return JSON.parse(localStorage.getItem("authUser"));
+  }
+
+  public setLoginInfo(authUser: LoginResultEntity) {
+    if (authUser.userId > 0 && authUser.authenticationToken) {
+      localStorage.setItem('authUser', JSON.stringify(authUser));
+    }
   }
 
   public closeAllAlerts() {

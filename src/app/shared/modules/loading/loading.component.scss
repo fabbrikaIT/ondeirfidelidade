@@ -2,7 +2,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 99999;
+  z-index: 1050;
   -ms-transform: translate(-50%,-50%); /* IE 9 */
   -webkit-transform: translate(-50%,-50%); /* Safari */
   transform: translate(-50%,-50%); /* Standard syntax */
@@ -36,6 +36,7 @@
   right: 0;
   bottom: 0;
   overflow: auto;
+  z-index: 1051;
   background: rgba(112,44,145,0.8);
   text-align: center;
   color: #fff;
