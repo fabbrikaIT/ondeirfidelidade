@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
 
 import { BaseComponent } from "../../shared/base/base.component";
 import { AlertService } from "../../shared/modules/alert/alert.service";
@@ -15,7 +14,7 @@ export class LoyaltyComponent extends BaseComponent implements OnInit {
   loyalties: Array<LoyaltyEntity>;
   selectedStatusFilter: string = "0";
 
-  constructor(alert: AlertService, private service: LoyaltyService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(alert: AlertService, private service: LoyaltyService) {
     super(alert);
   }
 
