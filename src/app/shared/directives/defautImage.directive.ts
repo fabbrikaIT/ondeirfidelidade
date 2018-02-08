@@ -9,12 +9,10 @@ export class DefaultImageDirective implements OnInit {
   constructor(private hostElement: ElementRef, private renderer: Renderer) {}
 
   ngOnInit() {
-      console.log(this.hostElement);
-
       if (this.hostElement.nativeElement instanceof HTMLImageElement) {
         const imgElement = this.hostElement.nativeElement as HTMLImageElement;
 
-        if (imgElement.baseURI === imgElement.src) {
+        if (!imgElement.src || imgElement.src === "" || imgElement.src === null || imgElement.baseURI === imgElement.src || imgElement.src === imgElement.baseURI + '/null') {
           imgElement.src = this.defaultImage;
         }
       }

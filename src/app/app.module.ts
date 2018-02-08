@@ -17,6 +17,7 @@ import { DialogService } from './shared/modules/dialog/dialog.service';
 import { AdDirective } from './shared/modules/dialog/dialog.component';
 import { QrcodeComponent } from './shell/loyalty/qrcode/qrcode.component';
 import { CardComponent } from './shell/loyalty/card/card.component';
+import { VoucherComponent } from './shell/offers/voucher/voucher.component';
 
 registerLocaleData(localePt);
 
@@ -25,7 +26,8 @@ registerLocaleData(localePt);
     AppComponent,
     AdDirective,
     QrcodeComponent,
-    CardComponent
+    CardComponent,
+    VoucherComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ registerLocaleData(localePt);
   ],
   entryComponents: [
     QrcodeComponent,
-    CardComponent
+    CardComponent,
+    VoucherComponent
   ],
   bootstrap: [
     AppComponent

@@ -61,9 +61,7 @@ export abstract class BaseComponent {
 
   // Verificação se o formulário é valido
   public formIsValid(): boolean {
-    if (!this.formFields.valid) {
-      this.validOnSubmit(this.formFields);
-    }
+    this.validOnSubmit(this.formFields);
 
     return this.formFields.valid;
   }

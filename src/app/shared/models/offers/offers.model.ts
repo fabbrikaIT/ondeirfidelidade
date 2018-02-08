@@ -1,5 +1,6 @@
 import { BaseEntity } from "../base/base.model";
 import { IToMysqlDbEntity } from "../base/iToMysqlDbEntity";
+import { OwnerEntity } from "../owner/ownerEntity";
 
 export enum EOfferStatus {
     Active = 1,
@@ -19,6 +20,7 @@ export class OffersEntity extends BaseEntity implements IToMysqlDbEntity {
     public qrHash: string;
     public status: EOfferStatus;
     public restriction: string;
+    public owner: OwnerEntity;
 
     public static getInstance(): OffersEntity {
         const instance = new OffersEntity();
@@ -27,6 +29,7 @@ export class OffersEntity extends BaseEntity implements IToMysqlDbEntity {
         instance.reward = "";
         instance.description = "";
         instance.restriction = "";
+        instance.owner = OwnerEntity.getInstance();
 
         return instance;
     }

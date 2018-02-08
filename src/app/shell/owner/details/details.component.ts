@@ -48,7 +48,6 @@ export class DetailsComponent extends BaseComponent implements OnInit {
 
         this.service.GetOwner(params["id"]).subscribe(
           ret => {
-            console.log(ret);
             this.isProcessing = false;
 
             this.owner = ret;

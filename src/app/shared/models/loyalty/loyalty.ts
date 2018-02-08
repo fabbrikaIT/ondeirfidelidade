@@ -2,6 +2,7 @@ import { LoyaltyValidity } from './loyaltyValidity';
 import { BaseEntity } from "../base/base.model";
 import { IToMysqlDbEntity } from "../base/iToMysqlDbEntity";
 import { LoyaltyUsageType } from './loyaltyUsageType';
+import { OwnerEntity } from '../owner/ownerEntity';
 
 export enum ELoyaltyStatus {
   Pendent = 1,
@@ -24,6 +25,7 @@ export class LoyaltyEntity extends BaseEntity implements IToMysqlDbEntity {
   public validity: Array<LoyaltyValidity>;
   public usageType: LoyaltyUsageType;
   public qrHash: string;
+  public owner: OwnerEntity;
 
   public static getInstance(): LoyaltyEntity {
     const instance = new LoyaltyEntity();
@@ -31,6 +33,7 @@ export class LoyaltyEntity extends BaseEntity implements IToMysqlDbEntity {
     instance.validity = new Array<LoyaltyValidity>();
     instance.type = 1;
     instance.usageType = LoyaltyUsageType.getInstance();
+    instance.owner = OwnerEntity.getInstance();
 
     return instance;
   }

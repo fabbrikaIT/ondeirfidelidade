@@ -93,4 +93,33 @@ export class OffersService extends BaseService {
             })
             .catch(this.handleErrorObservable);
   }
+
+  /** Ativação e Inativação de campanha de oferta */
+  public ActiveOffers(offerId: number): Observable<boolean> {
+    const serviceUrl = `${this.config.baseUrl}offers/activate`;
+    const body = {
+      id: offerId
+    };
+
+    return this.clientHttp
+            .post(serviceUrl, body)
+            .map((res: Response) => {
+                return (res as any).Executed;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public InactiveOffers(OfferId: number): Observable<boolean> {
+    const serviceUrl = `${this.config.baseUrl}offers/deactivate`;
+    const body = {
+      id: OfferId
+    };
+
+    return this.clientHttp
+            .post(serviceUrl, body)
+            .map((res: Response) => {
+                return (res as any).Executed;
+            })
+            .catch(this.handleErrorObservable);
+  }
 }

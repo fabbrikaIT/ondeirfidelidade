@@ -46,6 +46,10 @@ export class AlertComponent implements OnInit {
         this.service.messageAlert.subscribe(alert => {
             this.alert = alert;
             this.state = this.state === "close" ? "show" : "close";
+
+            setTimeout(() => {
+              this.closeAlert();
+            }, 4000);
         });
     }
 

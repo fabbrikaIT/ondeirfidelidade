@@ -201,9 +201,6 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
       if (this.isNew) {
         this.loyalty.ownerId = this.loginInfo.userId;
 
-        console.log(this.loyalty);
-        console.log(this.loginInfo);
-
         this.service.CreateLoyalty(this.loyalty).subscribe(
           ret => {
             this.isProcessing = false;
@@ -217,9 +214,12 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
                 }
 
                 // Mostrar QR Code para impressão
+                this.onPrintQRCode();
 
                 // Retorna para a listagem
-                this.location.back();
+                // this.location.back();
+
+                this.isNew = false;
               });
             }
 

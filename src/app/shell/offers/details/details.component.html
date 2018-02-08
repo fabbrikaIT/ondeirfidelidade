@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-12 mb-2">
-      <div *ngIf="!isNew" class="float-left">
+      <div *ngIf="!isNew" class="float-left" style="display: none;">
           <button  class="btn btn-primary" (click)="onPrintQRCode()">Imprimir QR Code</button>
       </div>
 
@@ -80,14 +80,14 @@
                           </div>
 
                           <select formControlName="type" class="form-control float-right w-75" [(ngModel)]="offer.type">
-                              <option value="1" selected>Desconto</option>
-                              <option value="2">Promocional</option>
+                              <option [ngValue]="1" selected>Desconto</option>
+                              <option [ngValue]="2">Promocional</option>
                           </select>
                         </div>
                         <app-field-control-error [showError]="verifyValidTouched('type')" errorMessage="Tipo da promoção é Obrigatório" class="fixErrorPosition"></app-field-control-error>
                     </div>
                     <!-- Desconto -->
-                    <div class="col-12" *ngIf="offer?.type == '1'">
+                    <div class="col-12" *ngIf="offer?.type == 1">
                         <div class="form-group col-sm-12" >
                             <small class="form-text text-muted">Insira o percetual de desconto que será oferecido</small>
                             <div class="input-group mb-3">
@@ -111,7 +111,7 @@
                     </div>
 
                     <!-- Promocional -->
-                    <div class="col-12" *ngIf="offer?.type == '2'">
+                    <div class="col-12" *ngIf="offer?.type == 2">
                       <div class="form-group col-sm-12" >
                           <small class="form-text text-muted">Descreva aqui o que seu cliente deve executar o qual será o beneficio que ele receberá (Ex: Na compra de um pizza grande leve uma pizza brotinho doce</small>
                           <div class="input-group mb-3">
@@ -139,10 +139,17 @@
                           <i class="fa fa-file"></i>
                         </div>
 
-                        <textarea class="form-control" formControlName="restrictions" placeholder="Restrições da Oferta" [(ngModel)]="offer.restrictions" [ngClass]="applyCssError('restrictions')"></textarea>
+                        <textarea class="form-control" formControlName="restrictions" placeholder="Restrições da Oferta" [(ngModel)]="offer.restriction" [ngClass]="applyCssError('restrictions')"></textarea>
                       </div>
                       <app-field-control-error [showError]="verifyValidTouched('restrictions')" errorMessage="Restrições/Termos de Uso são Obrigatórios" class="fixErrorPosition"></app-field-control-error>
                   </div>
+                </div>
+
+                <div class="card-footer">
+                  <button *ngIf="!isNew" class="btn btn-danger float-left" (click)="onDelete()">Excluir</button>
+
+                  <button class="btn btn-primary float-right" (click)="onSave()">Salvar</button>
+                  <button class="btn btn-primary float-right mr-2" (click)="onVoucher()">Voucher</button>
                 </div>
               </div>
           </div>

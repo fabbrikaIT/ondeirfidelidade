@@ -1,6 +1,6 @@
 <div #container class="container card-loyalty">
   <div class="d-inline">
-    <img class="w-25 float-left" src="assets/images/ondeir-fundo-branco.png">
+      <img class="w-25 float-left" [src]="loyalty?.owner?.logo" [defaultImage]="'assets/images/ondeir-fundo-branco.png'">
     <div class="d-flex align-items-center float-right">
       <h3 class="float-right">
           {{loyalty.name}}
