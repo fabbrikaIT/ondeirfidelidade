@@ -47,8 +47,7 @@
                       <i class="fa fa-mobile"></i>
                     </div>
                     <input class="form-control" autofocus formControlName="cellphone" placeholder="Responsável" [(ngModel)]="owner.cellphone"
-                    [ngClass]="applyCssError('cellphone')"
-                  />
+                    [ngClass]="applyCssError('cellphone')" mask="(00) 0.0000-0000"/>
                   </div>
                   <app-field-control-error [showError]="verifyValidTouched('cellphone')" errorMessage="Celular é Obrigatório" class="fixErrorPosition"></app-field-control-error>
                 </div>
@@ -65,8 +64,13 @@
               <div class="card-body">
                 <div class="col-12">
                   <div class="form-group col-12 col-md-3 float-left">
+                    <div class="d-flex align-items-center justify-content-center logo-area">
+                      <div class="logo-search" (click)="upload.click()"></div>
+                      <img [src]="owner?.logo" [defaultImage]="'assets/images/pinOndeIr.png'" style="width: 50%;" (click)="upload.click()" >
+                      <input #upload type="file" (change)="onFileSelect($event.target.files)" style="display: none;" accept="image/*">
+                    </div>
                     <div class="d-flex align-items-center justify-content-center">
-                      <img *ngIf="!owner?.logo" src="assets/images/pinOndeIr.png" style="width: 50%;" >
+                      <small>Clique na imagem para alterar</small>
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-9 float-right" [ngClass]="applyCssError('title')">
@@ -75,9 +79,11 @@
                       <div class="input-group-addon">
                         <i class="fa fa-map-marker"></i>
                       </div>
-                      <input class="form-control" autofocus formControlName="title" placeholder="Responsável" [(ngModel)]="owner.title" [ngClass]="applyCssError('title')"
-                      />
-
+                      <input class="form-control" formControlName="title" placeholder="Estabelecimento" [typeahead]="dataSource"
+                      [ngModel]="selectedStore" (ngModelChange)="loadDataSource($event)" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
+                      [typeaheadMinLength]="0" (typeaheadOnSelect)="typeaheadOnSelect($event)" [ngClass]="applyCssError('title')" autocomplete="false" spellcheck="false" />
+                      <div *ngIf="typeaheadLoading===true">Loading</div>
+                      <div *ngIf="typeaheadNoResults===true">&#10060; No Results Found</div>
                     </div>
                     <app-field-control-error [showError]="verifyValidTouched('title')" errorMessage="Referencia ao App é Obrigatória" class="fixErrorPosition"></app-field-control-error>
                   </div>

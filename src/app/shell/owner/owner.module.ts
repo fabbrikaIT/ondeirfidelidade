@@ -1,4 +1,4 @@
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, TypeaheadModule } from 'ngx-bootstrap';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { InputMaskModule } from 'ng2-inputmask';
@@ -19,6 +19,7 @@ import { DetailsComponent } from './details/details.component';
     SharedModule,
     InputMaskModule,
     BsDatepickerModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   declarations: [OwnerComponent, DetailsComponent],
   providers: [

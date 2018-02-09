@@ -9,10 +9,13 @@ export class AppConfig {
   // baseUrl: string = 'http://localhost:8001/v0/';
 
   // Dev Container
-  baseUrl: string = 'http://ondeirfidelidade.fr.openode.io/v0/';
+   baseUrl: string = 'http://ondeirfidelidade.fr.openode.io/v0/';
 
   // Prod Container
   // baseUrl: string = 'http://appondeir.azurewebsites.net/ondeircuritiba/';
 
   // Aplication Configurations
+
+  // App Onde Ir Api
+  ondeIrApi: string = 'http://appondeir.azurewebsites.net/ondeircuritiba/ondeir/';
 }

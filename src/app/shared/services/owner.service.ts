@@ -1,3 +1,4 @@
+import { StoreEntity } from './../models/owner/store.entity';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -93,5 +94,20 @@ export class OwnerService extends BaseService {
                 return (res as any).Executed;
             })
             .catch(this.handleErrorObservable);
+  }
+
+  public GetStores(filter: string): Observable<any> {
+    if (!filter) {
+      return Observable.of(new Array<StoreEntity>());
+    }
+
+    const serviceUrl = `${this.config.ondeIrApi}SearchPlaces?categoryId=0&searchText=${filter}`;
+
+    return this.clientHttp.get(serviceUrl)
+        .map((res: Response) => {
+          // console.log((res as any).places);
+          return (res as any).places;
+        })
+        .catch(this.handleErrorObservable);
   }
 }
