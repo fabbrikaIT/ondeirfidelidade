@@ -46,7 +46,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-mobile"></i>
                     </div>
-                    <input class="form-control" autofocus formControlName="cellphone" placeholder="Responsável" [(ngModel)]="owner.cellphone"
+                    <input class="form-control" autofocus formControlName="cellphone" placeholder="Celular do Responsável" [(ngModel)]="owner.cellphone"
                     [ngClass]="applyCssError('cellphone')" mask="(00) 0.0000-0000"/>
                   </div>
                   <app-field-control-error [showError]="verifyValidTouched('cellphone')" errorMessage="Celular é Obrigatório" class="fixErrorPosition"></app-field-control-error>

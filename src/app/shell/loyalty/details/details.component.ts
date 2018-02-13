@@ -144,7 +144,7 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
     }
   }
 
-  //Imprimi QR Code de identificação.
+  // Imprimi QR Code de identificação.
   onPrintQRCode() {
     this.dialogService.dialogContent("Imprimir QR Code", {
       component: QrcodeComponent,
@@ -191,6 +191,18 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
 
   }
 
+  publishNewCallback(dialogResult) {
+    if (dialogResult) {
+      this.activeStatus = true;
+      this.onLoyaltyStatusChange();
+    }
+
+
+
+    // Retorna para a listagem
+    // this.location.back();
+  }
+
   // Salva os dados do programa
   onSave() {
     if (this.formIsValid) {
@@ -205,25 +217,14 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
           ret => {
             this.isProcessing = false;
 
-            // Verificar se usuário quer publicar o programa
-            if (!this.dialogSubscriber) {
-              this.dialogSubscriber = this.dialogService.dialogResult.subscribe(dialogResult => {
-                if (dialogResult) {
-                  this.activeStatus = true;
-                  this.onLoyaltyStatusChange();
-                }
+            this.dialogService.dialogConfirm("Programa de Fidelidade", "Deseja publicar o programa de fidelidade criado?",
+              "Sim", "Não", this.publishNewCallback);
 
-                // Mostrar QR Code para impressão
-                this.onPrintQRCode();
+            // Mostrar QR Code para impressão
+            this.onPrintQRCode();
 
-                // Retorna para a listagem
-                // this.location.back();
+            this.isNew = false;
 
-                this.isNew = false;
-              });
-            }
-
-            this.dialogService.dialogConfirm("Programa de Fidelidade", "Deseja publicar o programa de fidelidade criado?");
           },
           err => {
             this.alert.alertError("Criando novo Fidelidade", err);

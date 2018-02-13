@@ -5,33 +5,38 @@
         <div class="card-header">
           <h2>Meus Dados</h2>
         </div>
-        <div class="card-header">
-          <form>
+        <div class="card-body">
+          <form [formGroup]="formFields">
             <div class="row">
               <div class="col-12 col-md-4">
-                <div class="text-center">
-                  <img src="" class="img-thumbnail rounded photo-size" alt="Foto" [defaultImage]="'assets/images/pinOndeIrBranco.png'"/>
-                </div>
+                  <div class="d-flex align-items-center justify-content-center logo-area">
+                    <div class="logo-search" (click)="upload.click()"></div>
+                    <img [src]="owner?.logo" [defaultImage]="'assets/images/pinOndeIr.png'" style="width: 50%;" (click)="upload.click()" >
+                    <input #upload type="file" (change)="onFileSelect($event.target.files)" style="display: none;" accept="image/*">
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <small>Clique na imagem para alterar</small>
+                  </div>
               </div>
               <div class="col-12 col-md-4">
                 <label for="txtId">Código:</label>
-                <input class="form-control" id="txtId" disabled>
+                <input class="form-control" id="txtId" [(ngModel)]="owner.id" formControlName="id">
               </div>
               <div class="col-12 col-md-4">
                 <label for="txtOndeId">Estabelecimento Onde Ir:</label>
-                <input class="form-control" id="txtOndeId" disabled>
+                <input class="form-control" id="txtOndeId" [(ngModel)]="owner.title" formControlName="title">
               </div>
               <div class="col-12">
                 <label for="txtName">Nome:</label>
-                <input class="form-control" id="txtName">
+                <input class="form-control" id="txtName" [(ngModel)]="owner.ownerName" formControlName="name">
               </div>
               <div class="col-12">
                 <label for="txtEmail">E-mail:</label>
-                <input class="form-control" id="txtEmail">
+                <input class="form-control" id="txtEmail" [(ngModel)]="owner.email" formControlName="email">
               </div>
               <div class="col-12 col-md-6">
                 <label for="txtCellphone">Celular:</label>
-                <input class="form-control" id="txtCellphone">
+                <input class="form-control" id="txtCellphone" [(ngModel)]="owner.cellphone" formControlName="cellphone">
               </div>
             </div>
           </form>
