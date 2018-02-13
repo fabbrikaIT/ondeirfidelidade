@@ -82,8 +82,7 @@
                       <input class="form-control" formControlName="title" placeholder="Estabelecimento" [typeahead]="dataSource"
                       [ngModel]="selectedStore" (ngModelChange)="loadDataSource($event)" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
                       [typeaheadMinLength]="0" (typeaheadOnSelect)="typeaheadOnSelect($event)" [ngClass]="applyCssError('title')" autocomplete="false" spellcheck="false" />
-                      <div *ngIf="typeaheadLoading===true">Loading</div>
-                      <div *ngIf="typeaheadNoResults===true">&#10060; No Results Found</div>
+                      <div *ngIf="typeaheadLoading===true">Carregando</div>
                     </div>
                     <app-field-control-error [showError]="verifyValidTouched('title')" errorMessage="Referencia ao App é Obrigatória" class="fixErrorPosition"></app-field-control-error>
                   </div>

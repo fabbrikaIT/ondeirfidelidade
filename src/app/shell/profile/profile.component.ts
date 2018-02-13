@@ -49,4 +49,33 @@ export class ProfileComponent extends BaseComponent implements OnInit {
       title: [{value: "", disabled: true}]
    });
   }
+
+  onFileSelect(files) {
+    if (files && files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.owner.logo = reader.result;
+      };
+
+      reader.readAsDataURL(files[0]);
+
+    }
+  }
+
+  onSave() {
+    if (this.validOnSubmit) {
+      this.isProcessing = true;
+
+      this.service.UpdateOwner(this.owner).subscribe(
+        ret => {
+          this.isProcessing = false;
+          this.alert.alertInformation("Atualizar Meus Dados", "Dados atualizados com sucesso");
+        },
+        err => {
+          this.isProcessing = false;
+          this.alert.alertError("Atualizar dados", err);
+        }
+      );
+    }
+  }
 }
