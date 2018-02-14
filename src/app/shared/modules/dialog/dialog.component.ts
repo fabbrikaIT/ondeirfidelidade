@@ -82,6 +82,7 @@ export class DialogComponent implements OnInit {
     this.isContent = false;
     this.confirmText = "Confirmar";
     this.cancelText = "Cancelar";
+    this.showConfirm = false;
 
     this.callback = null;
   }
@@ -99,6 +100,7 @@ export class DialogComponent implements OnInit {
         break;
       case EDialogType.Confirm:
         this.isConfirm = true;
+        this.showConfirm = true;
         this.cancelText = dialog.cancelText;
         this.confirmText = dialog.confirmText;
         this.callback = dialog.callback;

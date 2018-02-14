@@ -1,3 +1,37 @@
-<p>
-  dashboard works!
-</p>
+<div class="container-fluid">
+    <h2 class="text-muted">Dashboard
+        <small>Confira os principais indicadores dos seus programas de fidelidade e campanhas de oferta.</small>
+    </h2>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card mb-3">
+              <div class="card-header">
+                  <h4>Indicadores Gerais do Onde Ir Fidelidade</h4>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-xl-3 col-lg-6">
+                          <app-stat [bgClass]="'primary arrange-indicators'" [icon]="'fa-credit-card'" [count]="loyaltyNumber"
+                            [label]="'Programas de Fidelidade'" [showDetails]="false" [isProcessing]="isGettingLoyalty"></app-stat>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                          <app-stat [bgClass]="'warning arrange-indicators'" [icon]="'fa-percent'" [count]="offersNumber"
+                            [label]="'Ofertas'" [showDetails]="false" [isProcessing]="isGettingOffers"></app-stat>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                          <app-stat [bgClass]="'danger arrange-indicators'" [icon]="'fa-users'" [count]="0"
+                            [label]="'Participantes de Fidelidade'" [showDetails]="false"></app-stat>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                          <app-stat [bgClass]="'success arrange-indicators'" [icon]="'fa-ticket'" [label]="'Cupons Gerados'"
+                            [count]="0" [showDetails]="false">
+                          </app-stat>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+<app-loading [isProcessing]="isProcessing"></app-loading>

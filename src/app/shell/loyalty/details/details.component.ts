@@ -191,16 +191,22 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
 
   }
 
-  publishNewCallback(dialogResult) {
+  publishNewCallback = (dialogResult) => {
     if (dialogResult) {
-      this.activeStatus = true;
-      this.onLoyaltyStatusChange();
+      //this.activeStatus = true;
+      //this.onLoyaltyStatusChange();
+
+      // Mostrar QR Code para impressão
+      this.onPrintQRCode();
+
+    } else {
+      // Retorna para a listagem
+      this.location.back();
     }
 
 
 
-    // Retorna para a listagem
-    // this.location.back();
+
   }
 
   // Salva os dados do programa
@@ -217,11 +223,8 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
           ret => {
             this.isProcessing = false;
 
-            this.dialogService.dialogConfirm("Programa de Fidelidade", "Deseja publicar o programa de fidelidade criado?",
+            this.dialogService.dialogConfirm("Programa de Fidelidade", "Imprimir o QR para pontuação no programa?",
               "Sim", "Não", this.publishNewCallback);
-
-            // Mostrar QR Code para impressão
-            this.onPrintQRCode();
 
             this.isNew = false;
 

@@ -1,5 +1,7 @@
 import { OwnerService } from './../../shared/services/owner.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Md5 } from 'ts-md5';
 
 import { BaseComponent } from '../../shared/base/base.component';
 import { AlertService } from '../../shared/modules/alert/alert.service';
@@ -14,8 +16,13 @@ import { OwnerEntity } from '../../shared/models/owner/ownerEntity';
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
   owner: OwnerEntity;
+  password: string;
+  confirmpassword: string;
 
-  constructor(alert: AlertService, private service: OwnerService, private formBuilder: FormBuilder, private dialogService: DialogService) {
+  modalRef: BsModalRef;
+
+  constructor(alert: AlertService, private service: OwnerService, private formBuilder: FormBuilder, private dialogService: DialogService,
+    private modalService: BsModalService) {
     super(alert);
   }
 
@@ -62,6 +69,13 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     }
   }
 
+  openUpdatePasswordModel(template: TemplateRef<any>) {
+    this.password = "";
+    this.confirmpassword = "";
+
+    this.modalRef = this.modalService.show(template);
+  }
+
   onSave() {
     if (this.validOnSubmit) {
       this.isProcessing = true;
@@ -78,4 +92,51 @@ export class ProfileComponent extends BaseComponent implements OnInit {
       );
     }
   }
+
+  updatePassword() {
+    this.alert.closeAlert();
+
+    if (this.password !== "" && this.confirmpassword !== "") {
+        if (this.password === this.confirmpassword) {
+            if (this.password.length <= 6) {
+                this.alert.alertWarning("Atualizar Senha", "A senha deve ter mais que 6 caracteres");
+                return;
+            }
+
+            const passRegex = new RegExp("^(?=.*[a-z])(?=.*[0-9])");
+            if (!passRegex.test(this.password)) {
+                this.alert.alertWarning("Atualizar Senha", "A senha deve conter letras e números");
+                return;
+            }
+
+            this.isProcessing = true;
+            this.service
+                .UpdatePassword(this.owner.id, Md5.hashStr(this.password).toString())
+                .subscribe(
+                    ret => {
+                        this.isProcessing = false;
+
+                        this.alert.alertInformation(
+                            "Atualizar Senha",
+                            "Senha atualizada com sucesso"
+                        );
+
+                        this.password = "";
+                        this.confirmpassword = "";
+                        this.modalRef.hide();
+                    },
+                    err => {
+                        this.alert.alertError("Atualizar Senha", err);
+
+                        this.isProcessing = false;
+                    }
+                );
+        } else {
+            this.alert.alertWarning(
+                "Alterar Senha",
+                "Senhas digitadas não conferem"
+            );
+        }
+    }
+}
 }

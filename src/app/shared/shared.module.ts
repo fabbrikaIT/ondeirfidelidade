@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { QrcodeComponent } from '../shell/loyalty/qrcode/qrcode.component';
 import { DynamicViewComponent } from './modules/dynamic-view/dynamic-view.component';
 import { ToggleSelectDirective } from './directives/toggleSelect.directive';
+import { StatComponent } from './modules/stat/stat.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { ToggleSelectDirective } from './directives/toggleSelect.directive';
     DialogComponent,
     DynamicViewComponent,
     FocusDirective,
-    ToggleSelectDirective
+    ToggleSelectDirective,
+    StatComponent
   ],
   exports: [
     LoadingComponent,
@@ -38,7 +40,8 @@ import { ToggleSelectDirective } from './directives/toggleSelect.directive';
     FieldControlErrorComponent,
     DialogComponent,
     FocusDirective,
-    ToggleSelectDirective
+    ToggleSelectDirective,
+    StatComponent
   ],
   providers: [
   ]

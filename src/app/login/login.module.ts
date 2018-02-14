@@ -2,6 +2,7 @@ import { AuthService } from './../shared/services/auth.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,7 +17,8 @@ import { SharedModule } from '../shared/shared.module';
     LoginRoutingModule,
     SharedModule,
     HttpClientModule,
-    NgbAlertModule.forRoot()
+    NgbAlertModule.forRoot(),
+    ModalModule.forRoot()
   ],
   declarations: [LoginComponent],
   providers: [

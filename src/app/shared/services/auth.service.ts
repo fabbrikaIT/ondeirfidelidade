@@ -30,4 +30,18 @@ export class AuthService extends BaseService {
             })
             .catch(this.handleErrorObservable);
   }
+
+  public ResetPassword(email: string): Observable<boolean> {
+    const serviceUrl = `${this.config.baseUrl}owner/reset`;
+
+    const body = {
+        email: email
+    };
+
+    return this.clientHttp.post(serviceUrl, body).map(
+          (res: Response) => {
+              return (res as any).executed;
+          })
+          .catch(this.handleErrorObservable);
+  }
 }

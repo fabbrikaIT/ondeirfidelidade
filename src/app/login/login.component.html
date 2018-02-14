@@ -16,9 +16,38 @@
                           placeholder="Senha" (keyup.enter)="onLoggedin()">
                   </div>
               </div>
-              <a class="btn rounded-btn" (click)="onLoggedin()"> Entrar </a>
+              <div style="display: inline-grid;">
+                  <a class="btn rounded-btn" (click)="onLoggedin()"> Entrar </a>
+                  <a class="mt-2 font-italic" style="cursor: pointer;text-decoration: underline;" (click)="openUpdatePasswordModel(template)">Esqueci minha senha...</a>
+              </div>
+
           </form>
       </div>
   </div>
 </div>
 <app-loading [isProcessing]="isProcessing"></app-loading>
+
+<!-- Html da modal de reset de senha -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Esqueci minha senha</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row w-100">
+            <div class="col-sm-12">
+                <div class="input-group" style="padding-bottom: 0;">
+                    <div class="input-group-addon">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <input type="text" class="form-control" id="txtReset" placeholder="E-mail cadastrado na plataforma" [(ngModel)]="email"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="resetPassword()">Resetar Senha</button>
+    </div>
+</ng-template>

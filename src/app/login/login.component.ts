@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from "@angular/core";
 import { Router } from "@angular/router";
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 import { BaseComponent } from "../shared/base/base.component";
 import { AlertService } from './../shared/modules/alert/alert.service';
@@ -16,7 +17,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
   user: string = "";
   pass: string = "";
 
-  constructor(private router: Router, alert: AlertService, private authService: AuthService) {
+  email: string = "";
+  modalRef: BsModalRef;
+
+  constructor(private router: Router, alert: AlertService, private authService: AuthService, private modalService: BsModalService) {
     super(alert);
   }
 
@@ -35,7 +39,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       // Usuário de desenvolvimento
       authUser.authenticationToken = "qwert";
       authUser.loginAccept = true;
-      authUser.userName = "Developer Mode";
+      authUser.userName = "Administrator Mode";
       authUser.type = 2;
       authUser.userId = 0;
 
@@ -73,5 +77,38 @@ export class LoginComponent extends BaseComponent implements OnInit {
     localStorage.setItem('authUser', JSON.stringify(authUser));
 
     this.router.navigate(['dashboard']);
+  }
+
+  openUpdatePasswordModel(template: TemplateRef<any>) {
+    this.email = "";
+
+    this.modalRef = this.modalService.show(template);
+  }
+
+  resetPassword() {
+    if (this.email === "") {
+      return;
+    }
+
+    if (!Utils.validateEmail(this.email)) {
+      this.alert.alertWarning("Reset Senha", "Email inválido");
+      return;
+    }
+
+    this.isProcessing = true;
+
+    this.authService.ResetPassword(this.email).subscribe(
+      ret => {
+        this.isProcessing = false;
+        this.email = "";
+
+        this.alert.alertInformation("Reset Senha", "Uma nova senha foi enviada para o e-mail informado.");
+        this.modalRef.hide();
+      },
+      err => {
+        this.isProcessing = false;
+        this.alert.alertError("Reset Senha", err);
+      }
+    );
   }
 }

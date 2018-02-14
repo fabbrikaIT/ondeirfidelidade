@@ -43,19 +43,19 @@ export class OwnerService extends BaseService {
             .catch(this.handleErrorObservable);
   }
 
-  public ResetPassword(ownerId: number): Observable<boolean> {
-    const serviceUrl = `${this.config.baseUrl}owner/reset/${ownerId}`;
-    const body = {
-      id: ownerId
-    };
+  // public ResetPassword(ownerId: number): Observable<boolean> {
+  //   const serviceUrl = `${this.config.baseUrl}owner/reset/${ownerId}`;
+  //   const body = {
+  //     id: ownerId
+  //   };
 
-    return this.clientHttp
-            .post(serviceUrl, body)
-            .map((res: Response) => {
-                return (res as any).Executed;
-            })
-            .catch(this.handleErrorObservable);
-  }
+  //   return this.clientHttp
+  //           .post(serviceUrl, body)
+  //           .map((res: Response) => {
+  //               return (res as any).Executed;
+  //           })
+  //           .catch(this.handleErrorObservable);
+  // }
 
   public DeleteOwner(ownerId: number): Observable<boolean> {
     const serviceUrl = `${this.config.baseUrl}owner/${ownerId}`;
@@ -109,5 +109,20 @@ export class OwnerService extends BaseService {
           return (res as any).places;
         })
         .catch(this.handleErrorObservable);
+  }
+
+  public UpdatePassword(ownerId: number, password: string): Observable<boolean> {
+    const serviceUrl = `${this.config.baseUrl}owner/updatePassword`;
+
+    const body = {
+        memberId: ownerId,
+        password: password
+    };
+
+    return this.clientHttp.post(serviceUrl, body).map(
+          (res: Response) => {
+              return (res as any).executed;
+          })
+          .catch(this.handleErrorObservable);
   }
 }
