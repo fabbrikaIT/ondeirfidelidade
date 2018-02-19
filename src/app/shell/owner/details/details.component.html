@@ -79,9 +79,10 @@
                       <div class="input-group-addon">
                         <i class="fa fa-map-marker"></i>
                       </div>
-                      <input class="form-control" formControlName="title" placeholder="Estabelecimento" [typeahead]="dataSource"
-                      [ngModel]="selectedStore" (ngModelChange)="loadDataSource($event)" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
-                      [typeaheadMinLength]="0" (typeaheadOnSelect)="typeaheadOnSelect($event)" [ngClass]="applyCssError('title')" autocomplete="false" spellcheck="false" />
+                      <input class="form-control" formControlName="title" placeholder="Estabelecimento" [ngClass]="applyCssError('title')"
+                      [typeahead]="dataSource" [(ngModel)]="asyncSelected" typeaheadOptionField="store_name" [typeaheadWaitMs]="500"
+                      (typeaheadOnSelect)="typeaheadOnSelect($event)" (typeaheadLoading)="changeTypeaheadLoading($event)"
+                      [typeaheadScrollable]="true"/>
                       <div *ngIf="typeaheadLoading===true">Carregando</div>
                     </div>
                     <app-field-control-error [showError]="verifyValidTouched('title')" errorMessage="Referencia ao App é Obrigatória" class="fixErrorPosition"></app-field-control-error>

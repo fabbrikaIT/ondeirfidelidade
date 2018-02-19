@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
+import 'rxjs/add/operator/toPromise';
 
 import { BaseService } from '../base/base.service';
 import { AppConfig } from '../config/app.config';
@@ -96,17 +97,18 @@ export class OwnerService extends BaseService {
             .catch(this.handleErrorObservable);
   }
 
-  public GetStores(filter: string): Observable<any> {
+  public GetStores(cityId: number, filter: string): Observable<any> {
     if (!filter) {
       return Observable.of(new Array<StoreEntity>());
     }
 
-    const serviceUrl = `${this.config.ondeIrApi}SearchPlaces?categoryId=0&searchText=${filter}`;
+     // const serviceUrl = `${this.config.ondeIrApi}SearchPlaces?categoryId=0&searchText=${filter}`;
+     const serviceUrl = `${this.config.ondeIrApi}search_stores.php?max_count=20&codcidade=${cityId}&keywords=${filter}`;
 
-    return this.clientHttp.get(serviceUrl)
-        .map((res: Response) => {
-          // console.log((res as any).places);
-          return (res as any).places;
+        return this.clientHttp.get(serviceUrl)
+        .map((res) => {
+          return (res as any).stores;
+          // return (res as any).stores;
         })
         .catch(this.handleErrorObservable);
   }

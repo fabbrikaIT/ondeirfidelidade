@@ -211,7 +211,7 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
 
   // Salva os dados do programa
   onSave() {
-    if (this.formIsValid) {
+    if (this.formIsValid()) {
       this.isProcessing = true;
 
       window.scrollTo(0, 0);

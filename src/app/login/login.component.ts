@@ -42,6 +42,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       authUser.userName = "Administrator Mode";
       authUser.type = 2;
       authUser.userId = 0;
+      authUser.cityId = 21; // Curitiba
 
       this.setSession(authUser);
     } else {

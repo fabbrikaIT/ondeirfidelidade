@@ -5,9 +5,12 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { BsLocaleService, TypeaheadMatch } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscriber, Observable } from 'rxjs';
+import { Subscriber } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/finally";
+import 'rxjs/add/observable/of';
 
 import { BaseComponent } from '../../../shared/base/base.component';
 import { AlertService } from '../../../shared/modules/alert/alert.service';
@@ -15,6 +18,8 @@ import { DialogService } from '../../../shared/modules/dialog/dialog.service';
 import { OwnerEntity } from './../../../shared/models/owner/ownerEntity';
 import { OwnerService } from './../../../shared/services/owner.service';
 import { StoreEntity } from '../../../shared/models/owner/store.entity';
+
+// declare var ondeIrApi: any;
 
 @Component({
   selector: 'app-details',
@@ -27,17 +32,58 @@ export class DetailsComponent extends BaseComponent implements OnInit {
 
   owner: OwnerEntity;
 
-  dataSource: Array<StoreEntity> = new Array<StoreEntity>();
-  selectedStore: string;
+  // dataSource: Array<StoreEntity> = new Array<StoreEntity>();
+  public dataSource: Observable<any>;
+  asyncSelected: string;
+  lastSearch: string;
   typeaheadLoading: boolean;
   typeaheadNoResults: boolean;
+
+  statesComplex: any[] = [
+    { id: 1, name: 'Alabama', region: 'South' },
+    { id: 2, name: 'Alaska', region: 'West' },
+    {
+      id: 3,
+      name: 'Arizona',
+      region: 'West'
+    },
+    { id: 4, name: 'Arkansas', region: 'South' },
+    { id: 5, name: 'California', region: 'West' },
+    { id: 6, name: 'Colorado', region: 'West' },
+    { id: 7, name: 'Connecticut', region: 'Northeast' },
+    { id: 8, name: 'Delaware', region: 'South' },
+    { id: 9, name: 'Florida', region: 'South' },
+    { id: 10, name: 'Georgia', region: 'South' }
+  ];
+
+  public autoCompleteRef = this.autoComplete.bind(this);
 
   constructor(alert: AlertService, private _localeService: BsLocaleService, private location: Location, private service: OwnerService,
     private formBuilder: FormBuilder, private dialogService: DialogService, private route: ActivatedRoute) {
       super(alert);
+
+      this.dataSource = Observable.create((observer: any) => {
+        if (this.asyncSelected && this.asyncSelected.length >= 3 && this.asyncSelected !== this.lastSearch) {
+          this.lastSearch = this.asyncSelected;
+          this.service.GetStores(this.loginInfo.cityId, this.asyncSelected).subscribe(
+            ret => {
+              if (!ret || ret.length === 0) {
+                ret = new Array<any>();
+              }
+
+              console.log(ret);
+
+              observer.next(ret);
+            },
+          err => {
+            observer.next(null);
+          });
+        }
+      }).mergeMap((ret: any) => this.loadDataSource(ret));
    }
 
   ngOnInit() {
+
     // ajustando calendários
     defineLocale('pt-br', ptBrLocale);
     this._localeService.use('pt-br');
@@ -47,6 +93,8 @@ export class DetailsComponent extends BaseComponent implements OnInit {
 
     this.initForm();
     // this.initStores();
+
+    // this.autoComplete();
 
     this.route.params.subscribe( params => {
       if (params["id"]) {
@@ -60,7 +108,7 @@ export class DetailsComponent extends BaseComponent implements OnInit {
             this.isProcessing = false;
 
             this.owner = ret;
-            this.selectedStore = this.owner.title;
+            this.asyncSelected = this.owner.title;
           },
           err => {
             this.alert.alertError("Detalhe Credenciado", err);
@@ -86,26 +134,35 @@ export class DetailsComponent extends BaseComponent implements OnInit {
     // }).mergeMap((token: string) => this.service.GetStores(token));
   }
 
-  loadDataSource(e) {
-    if (e && e !== this.selectedStore) {
-      this.typeaheadLoading = true;
-      this.selectedStore = e;
+  autoComplete() {
+    this.dataSource = Observable.create((observer: any) => {
+      if (this.asyncSelected && this.asyncSelected.length >= 3 && this.asyncSelected !== this.lastSearch) {
+        // const result = ondeIrApi.listStores(this.loginInfo.cityId, this.selectedStore);
+        // console.log(result);
+        //
 
-      if (this.selectedStore && this.selectedStore.length >= 3) {
-        this.service.GetStores(this.selectedStore).subscribe(
-          ret => {
-            this.dataSource = ret;
-            this.typeaheadLoading = false;
-          },
-          err => {
-            this.dataSource = new Array<StoreEntity>();
-            this.typeaheadLoading = false;
-          }
-        );
-      } else {
-        this.dataSource = new Array<StoreEntity>();
-        this.typeaheadLoading = false;
+        // observer.next(result);
+        this.lastSearch = this.asyncSelected;
+        observer.next(this.asyncSelected);
       }
+    }).mergeMap((token: string) => this.loadDataSource(token));
+  }
+
+  getStatesAsObservable(token: string): Observable<any> {
+    const query = new RegExp(token, 'ig');
+
+    return Observable.of(
+      this.statesComplex.filter((state: any) => {
+        return query.test(state.name);
+      })
+    );
+  }
+
+  loadDataSource(result): Observable<any> {
+    if (result) {
+      return Observable.of(result);
+    } else {
+      return Observable.empty();
     }
   }
 
@@ -150,11 +207,13 @@ export class DetailsComponent extends BaseComponent implements OnInit {
   }
 
   onSave() {
-    if (this.formIsValid) {
+    if (this.formIsValid()) {
       this.isProcessing = true;
       window.scrollTo(0, 0);
 
       if (this.isNew) {
+        this.owner.city = this.loginInfo.cityId;
+
         this.service.CreateOwner(this.owner).subscribe(
           ret => {
             this.isProcessing = false;
@@ -187,7 +246,7 @@ export class DetailsComponent extends BaseComponent implements OnInit {
 
   /** Integração com base do aplicativo Onde Ir */
   changeTypeaheadLoading(e: boolean): void {
-    if (this.selectedStore && this.selectedStore.length >= 3) {
+    if (this.asyncSelected && this.asyncSelected.length >= 3) {
       this.typeaheadLoading = e;
     } else {
       this.typeaheadLoading = false;
@@ -201,9 +260,11 @@ export class DetailsComponent extends BaseComponent implements OnInit {
   }
 
   typeaheadOnSelect(e: TypeaheadMatch): void {
+    console.log(e);
+
     if (e && e.item) {
-      this.owner.ondeIrId = e.item.id;
-      this.owner.title = e.item.name;
+      this.owner.ondeIrId = e.item.store_id;
+      this.owner.title = e.item.store_name;
     }
   }
 }
