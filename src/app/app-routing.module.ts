@@ -6,6 +6,7 @@ import { AuthGuard } from "./shared/guard/auth.guard";
 const routes: Routes = [
   { path: '', loadChildren: "./shell/shell.module#ShellModule", canActivate: [AuthGuard]},
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
+  { path: 'card', loadChildren: './loyalty-card/loyalty-card.module#LoyaltyCardModule' },
   { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
   { path: '**', redirectTo: 'not-found' }
 ];

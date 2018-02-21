@@ -41,7 +41,8 @@ import { StatComponent } from './modules/stat/stat.component';
     DialogComponent,
     FocusDirective,
     ToggleSelectDirective,
-    StatComponent
+    StatComponent,
+    DynamicViewComponent
   ],
   providers: [
   ]

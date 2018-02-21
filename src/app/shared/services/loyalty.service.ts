@@ -8,6 +8,7 @@ import "rxjs/add/operator/catch";
 import { BaseService } from '../base/base.service';
 import { AppConfig } from '../config/app.config';
 import { LoyaltyEntity } from '../models/loyalty/loyalty';
+import { LoyaltyProgramEntity } from '../models/loyalty/loyaltyProgram';
 
 @Injectable()
 export class LoyaltyService extends BaseService {
@@ -49,13 +50,18 @@ export class LoyaltyService extends BaseService {
                 loyalty.startDate = new Date(loyalty.startDate);
                 loyalty.endDate = new Date(loyalty.endDate);
 
-                // if (loyalty.validity) {
-                //   loyalty.validity.forEach(x => {
-                //     x.startTime = new Date((x.startTime as Date).getTimezoneOffset());
-                //     x.endTime = new Date((x.endTime as Date).getTimezoneOffset());
-                //   });
-                // }
-                // console.log(loyalty.validity);
+                return loyalty;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public GetLoyaltyProgram(qrHash: string, userId: number): Observable<LoyaltyProgramEntity> {
+    const serviceUrl = `${this.config.baseUrl}loyalty/${qrHash}/${userId}`;
+
+    return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                const loyalty: LoyaltyProgramEntity = (res as any).Result;
 
                 return loyalty;
             })

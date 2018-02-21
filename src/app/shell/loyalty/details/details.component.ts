@@ -182,7 +182,8 @@ export class DetailsComponent extends BaseComponent implements OnInit, OnDestroy
     this.dialogService.dialogContent("Cartão de Fidelidade", {
       component: CardComponent,
       inputs: {
-        loyalty: this.loyalty
+        loyalty: this.loyalty,
+        program: null
       }
     }, this.closeCart, "Aprovar", "Fechar", false);
   }

@@ -19,6 +19,7 @@ import { QrcodeComponent } from './shell/loyalty/qrcode/qrcode.component';
 import { CardComponent } from './shell/loyalty/card/card.component';
 import { VoucherComponent } from './shell/offers/voucher/voucher.component';
 import { UnauthorizedInterceptor } from './shared/interceptors/unauthorized.interceptor';
+import { LoyaltyCardComponent } from './loyalty-card/loyalty-card.component';
 
 registerLocaleData(localePt);
 
