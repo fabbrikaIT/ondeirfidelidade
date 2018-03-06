@@ -168,7 +168,8 @@ export class DetailsComponent extends BaseComponent implements OnInit {
     this.dialogService.dialogContent("Cupom de Desconto", {
       component: VoucherComponent,
       inputs: {
-        offer: this.offer
+        offer: this.offer,
+        canUse: false
       }
     }, this.closeVoucher, "Aprovar", "Fechar", false);
   }

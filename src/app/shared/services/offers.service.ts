@@ -40,8 +40,45 @@ export class OffersService extends BaseService {
             .catch(this.handleErrorObservable);
   }
 
+  public ListUserOffers(userId: number): Observable<Array<OffersEntity>> {
+    const serviceUrl = `${this.config.baseUrl}offers/user/${userId}`;
+
+    return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public SearchOffers(cityId: number): Observable<Array<OffersEntity>> {
+    const serviceUrl = `${this.config.baseUrl}offers/search/${cityId}`;
+
+    return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
   public GetOffers(OffersId: number): Observable<OffersEntity> {
     const serviceUrl = `${this.config.baseUrl}offers/${OffersId}`;
+
+    return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                const offers: OffersEntity = (res as any).Result;
+                offers.startDate = new Date(offers.startDate);
+                offers.endDate = new Date(offers.endDate);
+
+                return offers;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public GetOfferHash(qrHash: string, userId: number): Observable<OffersEntity> {
+    const serviceUrl = `${this.config.baseUrl}offers/${qrHash}/${userId}`;
 
     return this.clientHttp
             .get(serviceUrl)
@@ -113,6 +150,36 @@ export class OffersService extends BaseService {
     const serviceUrl = `${this.config.baseUrl}offers/deactivate`;
     const body = {
       id: OfferId
+    };
+
+    return this.clientHttp
+            .post(serviceUrl, body)
+            .map((res: Response) => {
+                return (res as any).Executed;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public createCoupon = (userId: number, offerId: number): Observable<boolean>  => {
+    const serviceUrl = `${this.config.baseUrl}offers/createCoupon`;
+    const body = {
+      offerId: offerId,
+      userId: userId
+    };
+
+    return this.clientHttp
+            .post(serviceUrl, body)
+            .map((res: Response) => {
+                return (res as any).Executed;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public UseCoupon = (userId: number, offerId: number): Observable<boolean> => {
+    const serviceUrl = `${this.config.baseUrl}offers/useCoupon`;
+    const body = {
+      offerId: offerId,
+      userId: userId
     };
 
     return this.clientHttp

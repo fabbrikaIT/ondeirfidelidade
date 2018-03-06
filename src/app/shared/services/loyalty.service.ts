@@ -40,6 +40,17 @@ export class LoyaltyService extends BaseService {
             .catch(this.handleErrorObservable);
   }
 
+  public ListUserLoyalty(userId: number): Observable<Array<LoyaltyEntity>> {
+    const serviceUrl = `${this.config.baseUrl}loyalty/user/${userId}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
   public GetLoyalty(loyaltyId: number): Observable<LoyaltyEntity> {
     const serviceUrl = `${this.config.baseUrl}loyalty/${loyaltyId}`;
 
@@ -64,6 +75,17 @@ export class LoyaltyService extends BaseService {
                 const loyalty: LoyaltyProgramEntity = (res as any).Result;
 
                 return loyalty;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public SearchLoyalty(cityId: number): Observable<Array<LoyaltyEntity>> {
+    const serviceUrl = `${this.config.baseUrl}loyalty/search/${cityId}`;
+
+    return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
             })
             .catch(this.handleErrorObservable);
   }

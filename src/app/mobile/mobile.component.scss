@@ -1,0 +1,54 @@
+$topnav-background-color: #222;
+$topbar-background-color: #290a38;
+
+.bg-dark {
+  background-color: $topbar-background-color !important;
+  color: white;
+  height: 4em;
+}
+
+.menu-toggle-button {
+  color: white;
+  border-color: white;
+  padding: .25rem .75rem;
+  font-size: 1.25rem;
+  background: 0 0;
+  border: 1px solid white;
+  border-radius: .25rem;
+
+  .text-muted {
+    color: white!important;
+  }
+}
+
+.child-container {
+  position: absolute;
+  top: 4em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.menu-container {
+  position: absolute;
+  z-index: 999999;
+  border: 1px solid white;
+  background: $topbar-background-color;
+  padding: 10px;
+  right: 4%;
+
+  ul.submenu {
+    display: block;
+    list-style-type: none;
+    height: auto;
+    font-size: 15pt;
+    font-weight: bold;
+    li {
+        a {
+            color: #fff;
+            padding: 10px;
+            display: block;
+        }
+    }
+  }
+}

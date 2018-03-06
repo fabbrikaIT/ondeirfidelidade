@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+        <i class="fa fa-arrow-circle-left icon-font float-left" (click)="goBack()" style="cursor: pointer;"></i>
+    </div>
+    <div class="col-10">
+      <h3>{{ loyalty.name }}</h3>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-4">
+      <img class="w-100" [src]="loyalty.owner.logo" />
+    </div>
+    <div class="col-8">
+      <h5>{{ loyalty.owner.title }}</h5>
+      <span>Disponível de: {{ loyalty.startDate | date:'dd/MM/yyyy' }} até {{ loyalty.endDate | date:'dd/MM/yyyy' }}</span>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-12">
+        <span>A cada {{ loyalty.usageType.usageGoal }} utilizações ganhe {{ loyalty.usageType.usageReward }}</span>
+    </div>
+    <div class="col-12 p-2">
+        <button class="btn btn-primary w-100" (click)="openQRCode(qrtemplate)">Pontuar Fidelidade</button>
+    </div>
+  </div>
+</div>
+<app-loading [isProcessing]="isProcessing"></app-loading>
+
+<ng-template #qrtemplate>
+  <div class="container">
+    <div class="modal-header">
+      <h2 class="modal-title">Pontuar Fidelidade</h2>
+    </div>
+    <div class="modal-body">
+        <h5 class="text-center">Posicione o código do estabelecimento na centro da área abaixo para pontuar no programa de fidalidade!</h5>
+        <qr-scanner (onRead)="qrCodecallback($event)" [chooseCamera]="chosenCameraSubject" (foundCameras)="listCameras($event)"
+        (capturedQr)="qrCodecallback($event)" [canvasHeight]="640" [debug]="true"></qr-scanner>
+    </div>
+  </div>
+
+
+</ng-template>

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+        <i class="fa fa-arrow-circle-left icon-font float-left" (click)="goBack()" style="cursor: pointer;"></i>
+    </div>
+    <div class="col-10">
+      <h3>{{ offer.title }}</h3>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-4">
+      <img class="w-100" [src]="offer.owner.logo" />
+    </div>
+    <div class="col-8">
+      <h5>{{ offer.owner.title }}</h5>
+      <span>Disponível de: {{ offer.startDate | date:'dd/MM/yyyy' }} até {{ offer.endDate | date:'dd/MM/yyyy' }}</span>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-12">
+        <span>{{ offer.description }}</span>
+    </div>
+    <div class="col-12 p-2">
+        <button class="btn btn-primary w-100" (click)="onVoucher()">Gerar Cupom</button>
+    </div>
+  </div>
+</div>
+<app-loading [isProcessing]="isProcessing"></app-loading>

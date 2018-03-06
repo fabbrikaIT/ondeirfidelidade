@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="w-100 clearfix">
+      <div class="float-left">
+        <h2>Onde Ir Fidelidade</h2>
+      </div>
+      <div class="float-right">
+        <button class="menu-toggle-button mt-1" type="button" (click)="isOpen = !isOpen">
+          <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+        </button>
+        <div class="menu-container" *ngIf="isOpen">
+          <ul class="submenu">
+            <li>
+                <a href="javascript:void(0)" (click)="isOpen = !isOpen" routerLink="/mobile/loyalty/21"><span>Listar Fidelidades</span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" (click)="isOpen = !isOpen" routerLink="/mobile/offers/21/1"><span>Listar Ofertas</span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" (click)="isOpen = !isOpen" routerLink="/mobile/loyalty/user/1"><span>Meus Fidelidades</span></a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="isOpen = !isOpen" routerLink="/mobile/offers/user/1"><span>Minhas Ofertas</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="child-container">
+      <router-outlet></router-outlet>
+  </div>
+</div>

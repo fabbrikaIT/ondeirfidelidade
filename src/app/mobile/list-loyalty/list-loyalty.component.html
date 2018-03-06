@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <ul class="list-group w-100">
+      <li class="list-group-item" *ngFor="let loyalty of loyalties" (click)="showDetails(loyalty)">
+        <div class="row">
+          <div class="col-12">
+            <h3>{{ loyalty.name }}</h3>
+          </div>
+          <div class="col-12">
+            <span>A cada {{ loyalty.usageType.usageGoal}} utilizações você ganha {{ loyalty.usageType.usageReward }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<app-loading [isProcessing]="isProcessing"></app-loading>
