@@ -38,4 +38,26 @@ export class ReportsService extends BaseService {
             })
             .catch(this.handleErrorObservable);
   }
+
+  public GetProgramsNumber(ownerId: number): Observable<number> {
+    const serviceUrl = `${this.config.baseUrl}reports/dashboard/clients/${ownerId}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public GetCouponsNumber(ownerId: number): Observable<number> {
+    const serviceUrl = `${this.config.baseUrl}reports/dashboard/coupons/${ownerId}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
 }

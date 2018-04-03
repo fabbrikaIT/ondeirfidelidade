@@ -31,6 +31,32 @@ export class AuthService extends BaseService {
             .catch(this.handleErrorObservable);
   }
 
+  public OndeIrLogin(user: string, password: string): Observable<LoginResultEntity> {
+    const serviceUrl = `${this.config.ondeIrApi}loginAdmin.php?username=${user}&password=${password}`;
+
+    return this.clientHttp
+      .get(serviceUrl)
+      .map((res: Response) => {
+        const userOndeIr = (res as any);
+
+        const userRet: LoginResultEntity = LoginResultEntity.GetInstance();
+
+        if (userOndeIr.status) {
+          userRet.loginAccept = false;
+        } else {
+          // userRet.userId = userOndeIr.Codigo;
+          userRet.userId = 0;
+          userRet.type = 2;
+          userRet.userName = userOndeIr.Nome;
+          userRet.loginAccept = true;
+          userRet.cityId = 0;
+        }
+
+        return userRet;
+      })
+      .catch(this.handleErrorObservable);
+  }
+
   public ResetPassword(email: string): Observable<boolean> {
     const serviceUrl = `${this.config.baseUrl}owner/reset`;
 

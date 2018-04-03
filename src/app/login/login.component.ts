@@ -65,6 +65,22 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
       } else {
         // login Onde Ir
+        this.authService.OndeIrLogin(this.user, this.pass).subscribe(
+          ret => {
+            if (ret.loginAccept) {
+              this.setSession(ret);
+            } else {
+              this.isProcessing = false;
+              this.alert.alertWarning("Login", "Tentativa de acesso não autorizada");
+            }
+          },
+          err => {
+            this.alert.alertError("Login", err);
+            this.isProcessing = false;
+          }
+        );
+
+
         this.isProcessing = false;
       }
     }

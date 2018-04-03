@@ -13,9 +13,13 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
   loyaltyNumber: number = 0;
   offersNumber: number = 0;
+  programsNumber: number = 0;
+  couponsNumber: number = 0;
 
-  isGettingLoyalty: boolean = true;
+  isGettingLoyalty: boolean = false;
   isGettingOffers: boolean = false;
+  isGettingPrograms: boolean = false;
+  isGettingCoupons: boolean = false;
 
   constructor(alert: AlertService, private service: ReportsService) {
     super(alert);
@@ -24,6 +28,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.GetLoyaltyNumber();
     this.GetOffersNumber();
+    this.GetCouponsNumber();
+    this.GetProgramsNumber();
   }
 
   GetLoyaltyNumber() {
@@ -50,6 +56,34 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       err => {
         this.offersNumber = -1;
         this.isGettingOffers = false;
+      }
+    );
+  }
+
+  GetProgramsNumber() {
+    this.isGettingPrograms = true;
+    this.service.GetProgramsNumber(this.loginInfo.userId).subscribe(
+      ret => {
+        this.isGettingPrograms = false;
+        this.programsNumber = ret;
+      },
+      err => {
+        this.programsNumber = -1;
+        this.isGettingPrograms = false;
+      }
+    );
+  }
+
+  GetCouponsNumber() {
+    this.isGettingCoupons = true;
+    this.service.GetCouponsNumber(this.loginInfo.userId).subscribe(
+      ret => {
+        this.isGettingCoupons = false;
+        this.couponsNumber = ret;
+      },
+      err => {
+        this.couponsNumber = -1;
+        this.isGettingCoupons = false;
       }
     );
   }

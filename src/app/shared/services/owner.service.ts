@@ -20,7 +20,7 @@ export class OwnerService extends BaseService {
   }
 
   public ListOwner(): Observable<Array<OwnerEntity>> {
-    const serviceUrl = `${this.config.baseUrl}owner`;
+    const serviceUrl = `${this.config.baseUrl}owner/list/${this.loginInfo.cityId}`;
 
         return this.clientHttp
             .get(serviceUrl)
