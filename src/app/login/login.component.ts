@@ -7,6 +7,7 @@ import { AlertService } from './../shared/modules/alert/alert.service';
 import { LoginResultEntity } from './../shared/models/auth/loginResult.model';
 import { AuthService } from './../shared/services/auth.service';
 import { Utils } from './../shared/utils/Utils';
+import { Md5 } from "ts-md5";
 
 @Component({
   selector: "app-login",
@@ -65,7 +66,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
       } else {
         // login Onde Ir
-        this.authService.OndeIrLogin(this.user, this.pass).subscribe(
+        this.authService.OndeIrLogin(this.user, Md5.hashStr(this.pass).toString()).subscribe(
           ret => {
             if (ret.loginAccept) {
               this.setSession(ret);
