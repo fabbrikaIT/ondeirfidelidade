@@ -18,12 +18,17 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   processingMessage: string = "Carregando...";
   showMessage: boolean = true;
 
+  processingCityMessage: string = "Carregando...";
+  showCityMessage: boolean = true;
+
   authUser: LoginResultEntity;
   ownerList: Array<OwnerEntity>;
   selectedOwner: OwnerEntity;
 
   constructor(public router: Router, private service: OwnerService) {
     super(null);
+
+    console.log(this.loginInfo);
   }
 
   ngOnInit() {
@@ -79,6 +84,15 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
       this.router.navigate(["/"]);
     }
+  }
+
+  onCityChange() {
+    this.authUser = this.getLoginInfo();
+    this.authUser.cityId = this.loginInfo.cityId;
+
+    this.setLoginInfo(this.authUser);
+
+    this.router.navigate(["/"]);
   }
 
   isToggled(): boolean {

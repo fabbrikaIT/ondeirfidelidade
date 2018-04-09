@@ -5,6 +5,7 @@ export class LoginResultEntity {
   type: number;
   userId: number;
   cityId: number;
+  cities: Array<any>;
 
   public static GetInstance(): LoginResultEntity {
     const instance = new LoginResultEntity();
@@ -12,6 +13,7 @@ export class LoginResultEntity {
     instance.type = 1;
     instance.userId = 1;
     instance.cityId = 0;
+    instance.cities = new Array<any>();
 
     return instance;
   }

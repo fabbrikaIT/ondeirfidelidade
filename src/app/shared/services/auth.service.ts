@@ -49,7 +49,11 @@ export class AuthService extends BaseService {
           userRet.type = 2;
           userRet.userName = userOndeIr.Nome;
           userRet.loginAccept = true;
-          userRet.cityId = userOndeIr.codCidade;
+          userRet.cities = userOndeIr.codCidade;
+
+          if (userRet.cities && userRet.cities.length > 0) {
+            userRet.cityId = userRet.cities[0].CodCidade;
+          }
         }
 
         return userRet;
