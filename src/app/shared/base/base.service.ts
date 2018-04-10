@@ -5,9 +5,11 @@ import { AppConfig } from "../config/app.config";
 import { LoginResultEntity } from "../models/auth/loginResult.model";
 
 export abstract class BaseService {
-  public loginInfo: LoginResultEntity = JSON.parse(
-    localStorage.getItem("authUser")
-  );
+  public get loginInfo(): LoginResultEntity {
+    return JSON.parse(
+      localStorage.getItem("authUser")
+    );
+  }
 
   constructor(protected config: AppConfig, protected router: Router) {
     if (localStorage.getItem("authUser") === null) {

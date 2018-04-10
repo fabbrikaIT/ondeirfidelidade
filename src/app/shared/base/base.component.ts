@@ -9,7 +9,7 @@ export abstract class BaseComponent {
   public formFields: FormGroup;
 
   constructor(protected alert: AlertService) {
-
+    this.loginInfo = this.getLoginInfo();
   }
 
   // Compartilha os dados so usuário logado
@@ -28,8 +28,11 @@ export abstract class BaseComponent {
   }
 
   public setLoginInfo(authUser: LoginResultEntity) {
-    if (authUser.userId > 0 && authUser.authenticationToken) {
+    if (authUser.cityId > 0 && authUser.authenticationToken) {
+      localStorage.removeItem("authUser");
       localStorage.setItem('authUser', JSON.stringify(authUser));
+
+      this.loginInfo = authUser;
     }
   }
 
