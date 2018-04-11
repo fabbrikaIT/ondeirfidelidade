@@ -70,7 +70,9 @@ export class OffersService extends BaseService {
             .map((res: Response) => {
                 const offers: OffersEntity = (res as any).Result;
                 offers.startDate = new Date(offers.startDate);
-                offers.endDate = new Date(offers.endDate);
+                if (offers.endDate) {
+                  offers.endDate = new Date(offers.endDate);
+                }
 
                 return offers;
             })
@@ -85,7 +87,9 @@ export class OffersService extends BaseService {
             .map((res: Response) => {
                 const offers: OffersEntity = (res as any).Result;
                 offers.startDate = new Date(offers.startDate);
-                offers.endDate = new Date(offers.endDate);
+                if (offers.endDate) {
+                  offers.endDate = new Date(offers.endDate);
+                }
 
                 return offers;
             })

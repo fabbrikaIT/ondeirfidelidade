@@ -78,7 +78,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     if (this.selectedOwner && this.selectedOwner.id > 0) {
       this.authUser = this.getLoginInfo();
       this.authUser.userId = this.selectedOwner.id;
-      this.authUser.userName = this.selectedOwner.ownerName;
+      // this.authUser.userName = this.selectedOwner.ownerName;
 
       this.setLoginInfo(this.authUser);
 
@@ -88,9 +88,12 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   onCityChange() {
     this.authUser = this.getLoginInfo();
+    this.authUser.userId = 0;
     this.authUser.cityId = this.loginInfo.cityId;
 
     this.setLoginInfo(this.authUser);
+
+    this.setAdminProfile();
 
     this.router.navigate(["/"]);
   }

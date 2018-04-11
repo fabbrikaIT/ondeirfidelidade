@@ -59,7 +59,9 @@ export class LoyaltyService extends BaseService {
             .map((res: Response) => {
                 const loyalty: LoyaltyEntity = (res as any).Result;
                 loyalty.startDate = new Date(loyalty.startDate);
-                loyalty.endDate = new Date(loyalty.endDate);
+                if (loyalty.endDate) {
+                  loyalty.endDate = new Date(loyalty.endDate);
+                }
 
                 return loyalty;
             })

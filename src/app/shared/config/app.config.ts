@@ -13,7 +13,8 @@ export class AppConfig {
   //  baseUrl: string= 'http://onde-ir-fidelidade-api-ondeirfidelidade.7e14.starter-us-west-2.openshiftapps.com/v0/';
 
   // Prod Container
-  baseUrl: string = 'http://ondeir-env.sa-east-1.elasticbeanstalk.com/v0/';
+  // baseUrl: string = 'http://ondeir-env.sa-east-1.elasticbeanstalk.com/v0/';
+  baseUrl: string = 'https://ondeir-env.sa-east-1.elasticbeanstalk.com/v0/';
 
   // Aplication Configurations
 
