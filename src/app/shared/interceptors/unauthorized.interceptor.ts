@@ -54,8 +54,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
         // request = request.clone({
         //     setHeaders: {
-        //         Authorization: token,
-        //         "Content-Type": "application/json"
+        //       "Cache-Control": "no-cache"
         //     }
         // });
 

@@ -6,7 +6,7 @@ export class AppConfig {
   // API Configs
 
   // Local Container
-  // baseUrl: string = 'http://localhost:8001/v0/';
+  // baseUrl: string = 'http://localhost:8081/v0/';
 
   // Dev Container
   // baseUrl: string = 'http://ondeirfidelidade.fr.openode.io/v0/';
@@ -14,7 +14,7 @@ export class AppConfig {
 
   // Prod Container
   // baseUrl: string = 'http://ondeir-env.sa-east-1.elasticbeanstalk.com/v0/';
-  baseUrl: string = 'https://ondeir-env.sa-east-1.elasticbeanstalk.com/v0/';
+   baseUrl: string = 'https://api.ondeircidades.com.br/v0/';
 
   // Aplication Configurations
 

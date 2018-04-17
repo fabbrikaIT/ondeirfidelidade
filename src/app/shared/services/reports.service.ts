@@ -60,4 +60,37 @@ export class ReportsService extends BaseService {
             })
             .catch(this.handleErrorObservable);
   }
+
+  public ListLoyaltyPrograms(ownerId: number): Observable<any> {
+    const serviceUrl = `${this.config.baseUrl}reports/loyaltyprogram/${ownerId}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public ListCoupons(ownerId: number): Observable<any> {
+    const serviceUrl = `${this.config.baseUrl}reports/coupons/${ownerId}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
+
+  public ListClients(ownerId: number): Observable<any> {
+    const serviceUrl = `${this.config.baseUrl}reports/clients/${ownerId}`;
+
+        return this.clientHttp
+            .get(serviceUrl)
+            .map((res: Response) => {
+                return (res as any).Result;
+            })
+            .catch(this.handleErrorObservable);
+  }
 }

@@ -12,23 +12,23 @@
     <a routerLink="/offers" [routerLinkActive]="['router-link-active']" class="list-group-item">
       <i class="fa fa-fw fa-percent"></i>&nbsp;Ofertas
     </a>
-    <!-- <div class="nested-menu">
+    <div class="nested-menu">
       <a class="list-group-item" (click)="addExpandClass('pages')">
           <span><i class="fa fa-plus"></i>&nbsp; Relatórios</span>
       </a>
       <li class="nested" [class.expand]="showMenu === 'pages'">
           <ul class="submenu">
               <li>
-                  <a href="javascript:void(0)"><span>Adesões a Fidelidade</span></a>
+                  <a routerLink="/reports/programs" [routerLinkActive]="['router-link-active']"><span>Adesões a Fidelidade</span></a>
               </li>
               <li>
-                  <a href="javascript:void(0)"><span>Cupons e Ofertas</span></a>
+                  <a routerLink="/reports/coupons" [routerLinkActive]="['router-link-active']"><span>Cupons e Ofertas</span></a>
               </li>
               <li>
-                  <a href="javascript:void(0)"><span>Meus Clientes</span></a>
+                  <a routerLink="/reports/clients" [routerLinkActive]="['router-link-active']"><span>Meus Clientes</span></a>
               </li>
           </ul>
       </li>
-  </div> -->
+    </div>
   </ul>
 </nav>

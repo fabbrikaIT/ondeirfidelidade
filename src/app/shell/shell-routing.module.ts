@@ -11,7 +11,8 @@ const routes: Routes = [
       { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
       { path: 'owner', loadChildren: './owner/owner.module#OwnerModule' },
       { path: 'loyalty', loadChildren: './loyalty/loyalty.module#LoyaltyModule' },
-      { path: 'offers', loadChildren: './offers/offers.module#OffersModule' }
+      { path: 'offers', loadChildren: './offers/offers.module#OffersModule' },
+      { path: 'reports', loadChildren: './reports/reports.module#ReportsModule' }
     ]
   }
 ];
